@@ -1,0 +1,30 @@
+{
+  "name": "interface",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "concurrently": "^3.5.1",
+    "http": "0.0.0",
+    "lottie-web": "^5.1.16",
+    "nodemon": "^1.17.5",
+    "react": "^16.4.1",
+    "react-block-ui": "^1.1.1",
+    "react-dom": "^16.4.1",
+    "react-lottie": "^1.1.0",
+    "react-scripts": "1.1.4",
+    "reactstrap": "^6.1.0",
+    "reconnecting-websocket": "^4.0.0-rc5",
+    "redux": "^4.0.0",
+    "roslib": "^0.20.0",
+    "video-react": "^0.11.2",
+    "ws": "^5.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {}
+}
