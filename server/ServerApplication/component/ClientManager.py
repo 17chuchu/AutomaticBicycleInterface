@@ -26,6 +26,7 @@ class ClientManager(WebSocket):
 
 
     def handleMessage(self):
+        print(self.data)
         for c in ClientManager.clients:
             c.sendMessage(self.data)
 

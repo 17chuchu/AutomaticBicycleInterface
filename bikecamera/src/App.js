@@ -1,27 +1,25 @@
-import React from "react"
-import { Player } from 'video-react';
-import "/Users/slimshady23/GitHubProject/AutomaticBicycleInterface/interface/node_modules/video-react/dist/video-react.css";
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
 
 import SimpleWebRTC from 'simplewebrtc'
 import ReactDOM from 'react-dom'
 
 
-import {
-     TabPane, Fade
-} from 'reactstrap';
 
-class CameraTab extends React.Component
-{
-    remotesource = undefined
+class App extends React.Component {
 
-    constructor(props)
-    {
-        super(props)
+    webrtc = undefined
+
+    constructor(props) {
+        super(props);
+        this.addVideo = this.addVideo.bind(this);
+        this.removeVideo = this.removeVideo.bind(this);
+        this.readyToCall = this.readyToCall.bind(this);
     }
-
     componentDidMount() {
         this.webrtc = new SimpleWebRTC({
-            localVideoEl: "",
+            localVideoEl: ReactDOM.findDOMNode(this.refs.local),
             remoteVideosEl: "",
             autoRequestMedia: true,
             url: 'http://localhost:8888'
@@ -33,14 +31,13 @@ class CameraTab extends React.Component
         console.log("webrtc component mounted");
     }
 
-    addVideo = async (video, peer) => {
+    addVideo(video, peer) {
         console.log('video added', peer);
         //  console.log(this.refs.remotes);
         var remotes = ReactDOM.findDOMNode(this.refs.remotes);
-        console.log(video);
+        console.log(remotes);
         if (remotes) {
             var container = document.createElement('div');
-            container.style.transform = 'rotateY(-180deg)'
             container.className = 'videoContainer';
             container.id = 'container_' + this.webrtc.getDomId(peer);
             container.appendChild(video);
@@ -48,15 +45,13 @@ class CameraTab extends React.Component
             video.oncontextmenu = function() {
                 return false;
             };
-            video.width = 800
-            video.muted = true
             console.log(container);
             remotes.appendChild(container);
         }
         this.webrtc.mute()
     }
 
-    removeVideo = async(video, peer) => {
+    removeVideo(video, peer) {
         console.log('video removed ', peer);
         var remotes = ReactDOM.findDOMNode(this.refs.remotes);
         var el = document.getElementById(peer ? 'container_' +       this.webrtc.getDomId(peer) : 'localScreenContainer');
@@ -65,28 +60,26 @@ class CameraTab extends React.Component
         }
     }
 
-    readyToCall = async () => {
+    readyToCall() {
         return this.webrtc.joinRoom('12345');
     }
 
-
-
-
-    render()
-    {
-        return(
-            <TabPane tabId="CameraTab">
-                <Fade className={"CameraTabContainer"}in={this.props.active == "CameraTab"} id = "remoteVideos" ref = "remotes">
-                    <div
-                        className = "remotes"
-                        id = "remoteVideos"
-                        ref = "remotes" >
-                    </div>
-                </Fade>
-            </TabPane>
+    render() {
+        return (
+            <div>
+                <button onClick={this.readyToCall}>join</button>
+                <video className = "local"
+                    id = "localVideo"
+                    ref = "local" >
+                </video>
+                <div
+                    className = "remotes"
+                    id = "remoteVideos"
+                    ref = "remotes" >
+                </div>
+            </div>
         );
     }
 }
 
-
-export default CameraTab
+export default App;
