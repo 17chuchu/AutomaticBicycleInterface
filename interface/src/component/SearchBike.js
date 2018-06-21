@@ -6,14 +6,6 @@ import {
 
 class SearchBike extends React.Component
 {
-    state = {
-        collapse: false
-    }
-
-    toggleCollapse = async (num) =>{
-        this.setState({ collapse: !this.state.collapse });
-        console.log(this.state.collapse)
-    }
 
     addNewBikeId = async (e) =>{
         e.preventDefault()
@@ -21,7 +13,6 @@ class SearchBike extends React.Component
         console.log(bikeid)
         this.props.addBikeId(bikeid)
         e.target.elements[0].value = ""
-
     }
 
     setBikeId = async (id) => {
@@ -34,10 +25,10 @@ class SearchBike extends React.Component
 
         return([
                 <div className="SearchBike-header">
-                    <Button color="link" onClick={this.toggleCollapse} style = {{fontSize : "20px", color : "#da89a2",  textDecoration: 'none'}}>{this.props.bikeid}</Button>
+                    <Button color="link" onClick={this.props.toggleCollapse} style = {{fontSize : "20px", color : "#da89a2",  textDecoration: 'none'}}>{this.props.bikeid}</Button>
                 </div>,
 
-                <Collapse isOpen = {this.state.collapse}  >
+                <Collapse isOpen = {this.props.collapsesearch}  >
                     {
                         data.map(function(element,i){
                             return <EachId id = {element} setBikeId={this.props.setBikeId} removeBikeId={this.props.removeBikeId}/>

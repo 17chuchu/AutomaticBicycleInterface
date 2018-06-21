@@ -3,6 +3,7 @@
   pink  : #da89a2
   black : #22282c
   green : #5cc884
+  creme : #fcf6e5
 */
 
 
@@ -75,6 +76,16 @@
   color: #e0e2e4 !important;
 }
 
+.loginTheme
+{
+  float: right;
+  width: 100px;
+  height: 0px;
+  position: relative;
+  z-index: 100;
+}
+
+
 
 .SearchBike-header {
   background-image: linear-gradient(to bottom, #22282c, #22282c, #22282c, #22282c, #22282c);
@@ -139,6 +150,7 @@
 .videoContainer {
   width: 800px;
 }
+
 
 
 @keyframes App-logo-spin {

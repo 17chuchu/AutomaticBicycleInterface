@@ -21,8 +21,6 @@ class CameraTab extends React.Component
 
     componentDidMount() {
         this.webrtc = new SimpleWebRTC({
-            localVideoEl: "",
-            remoteVideosEl: "",
             autoRequestMedia: true,
             url: 'http://localhost:8888'
         });

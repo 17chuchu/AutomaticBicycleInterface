@@ -4,9 +4,8 @@ import Titles from "./component/SearchBike"
 import RealtimeTab from "./component/RealtimeTab"
 import CameraTab from "./component/CameraTab"
 import SearchBike from "./component/SearchBike"
-import Success from "./component/lottie/Success";
 import BlockUi from 'react-block-ui';
-import ReconnectingWebSocket from 'reconnecting-websocket';
+import SocketManager from './non-component/SocketManager';
 
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -14,8 +13,19 @@ import 'react-block-ui/style.css';
 
 
 import {
-    Nav, NavItem, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, NavLink, Container, Row, Col, TabContent, TabPane, Button, Collapse, Modal, ModalHeader, ModalBody, ModalFooter
+    Nav, NavItem
+    , Dropdown, DropdownItem, DropdownToggle, DropdownMenu
+    , NavLink
+    , Container
+    , Row, Col
+    , TabContent, TabPane
+    , Button
+    , Collapse
+    , Modal, ModalHeader, ModalBody, ModalFooter
+    , Badge
+    , Card ,CardTitle, CardText
 } from 'reactstrap';
+import AuthenticationSet from "./component/authentication/AuthenticationSet";
 
 
 
@@ -24,7 +34,8 @@ class App extends React.Component
 {
     myip = 'localhost'
     port = 7000
-    /*client = new ReconnectingWebSocket('ws://'+ this.myip +':' + this.port + '/');*/
+
+    searchbike = React.createRef();
 
     static = {
         activeNavItem: "App-nevItem-active",
@@ -39,7 +50,11 @@ class App extends React.Component
         allBikeId: [],
 
         activeTab: "RealtimeTab",
-        selectedbike: "Search your bike."
+        selectedbike: "Search your bike.",
+        loginTog: false,
+        loginButtonDisable: false,
+
+        collapsesearch: false
     }
 
     constructor(props)
@@ -56,12 +71,8 @@ class App extends React.Component
         this.setState({
             allBikeId: this.state.allBikeId
         })
-        /*
-        this.client.addEventListener('open', () => {
-            console.log("Successful connection to host: " + this.myip)
-        });
-        */
 
+        SocketManager.initialize(this.myip,this.port)
     }
 
     toggleNavItem = async (num) =>
@@ -73,6 +84,25 @@ class App extends React.Component
             navitemstatus: this.state.navitemstatus,
             activeTab: this.static.allTab[num]
         })
+    }
+
+    donothingfunction = async () => {}
+
+    toggleLogin = async () => {
+        this.setState({loginTog: !this.state.loginTog})
+    }
+
+    setLoginButton = async (state) =>
+    {
+        this.setState({loginButtonDisable : state})
+    }
+
+    toggleCollapse = async () =>{
+        this.setState({ collapsesearch: !this.state.collapsesearch });
+    }
+
+    forceCollapse = async () => {
+        this.setState({ collapsesearch: false });
     }
 
     setBikeId = async (id) =>
@@ -108,8 +138,12 @@ class App extends React.Component
         let status = this.state.navitemstatus
         return (
             <div className="Theme-color">
+                <div className="loginTheme">
+                    <Button color="secondary"  onClick={!this.state.loginButtonDisable ? this.toggleLogin : this.donothingfunction} style = {{ height : "45px", width : "200px",color: "#509f98",backgroundColor: "#fcf6e5" ,fontWeight: "500", fontSize : "20px",marginTop: "10px", marginRight: "10px",float : "right",  textDecoration: 'none'}} >visitor</Button>
+                    <AuthenticationSet loginTog = {this.state.loginTog} toggleLogin = {this.toggleLogin} setBikeId = {this.setBikeId} setLoginButton = {this.setLoginButton} forceCollapse={this.forceCollapse}/>
+                </div>
                 <p className="App-intro">App-Name</p>
-                <SearchBike bikeid = {this.state.selectedbike} setBikeId={this.setBikeId} addBikeId={this.addBikeId} removeBikeId={this.removeBikeId} allBike={this.state.allBikeId} />
+                <SearchBike ref={this.searchbike} bikeid = {this.state.selectedbike} setBikeId={this.setBikeId} addBikeId={this.addBikeId} removeBikeId={this.removeBikeId} allBike={this.state.allBikeId} toggleCollapse={this.toggleCollapse} collapsesearch={this.state.collapsesearch}/>
                 <Nav pills className = "App-nev-custom">
                     <NavItem className="App-nevButton-custom">
                         <NavLink href="#" className= {status[0]} onClick={() => { this.toggleNavItem(0); }} >information</NavLink>

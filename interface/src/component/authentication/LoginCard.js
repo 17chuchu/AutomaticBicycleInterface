@@ -1,0 +1,103 @@
+import React from "react"
+import ReactDOM from 'react-dom'
+
+import {
+    Card ,CardTitle, CardText, CardHeader
+    , Button
+    , Fade
+    , Form, FormGroup, Label, Col, Input
+    , FormFeedback
+} from 'reactstrap';
+import SocketManager from "../../non-component/SocketManager";
+
+
+class LoginCard extends React.Component
+{
+    username = React.createRef();
+    password = React.createRef();
+
+    state = {
+        logincardmargin : "10px",
+
+        usernameInvalid : false,
+        passwordValid : false,
+
+        userinfo : undefined
+    }
+
+    constructor(props)
+    {
+        super(props)
+        SocketManager.handlelogin = this.handlelogin
+    }
+
+    setmargin = async (margin) =>
+    {
+        this.setState({
+            logincardmargin: margin
+        })
+    }
+
+    performLogin = async () =>
+    {
+        var result = SocketManager.login(this.username.value,this.password.value)
+        this.password.value = ""
+        if(result === undefined)
+        {
+            this.setState({usernameInvalid : true, passwordValid : true})
+        }
+        else
+        {
+            this.setState({userinfo : result})
+        }
+
+        //this.props.userMode()
+    }
+
+    handlelogin = async (data) =>
+    {
+        if(data.comment == "Login Unsuccessful.")
+        {
+            return undefined
+        }
+        else
+        {
+            SocketManager.token = data.comment
+            return JSON.parse(data.info)
+        }
+    }
+
+    render() {
+        return (
+            <Fade in={true} >
+                    <Card body className="text-center" style={{width: "500px", float: "right", marginRight: this.state.logincardmargin, marginTop: "10px",zIndex: "100", backgroundColor: "#fcf6e5"}}>
+                        <CardTitle style = {{color : "#c34580"}}>Welcome</CardTitle>
+                        <Form style={{marginTop: "20px"}} onSubmit = {this.performLogin}>
+                            <FormGroup row>
+                                <Label for="exampleEmail" style = {{color : "#bd535b"}} sm={3}>Email</Label>
+                                <Col sm={9}>
+                                    <Input invalid={this.state.usernameInvalid} innerRef={input => (this.username = input)} type="email" name="email" id="exampleEmail" placeholder="enter your email" />
+                                    <FormFeedback tooltip>Please, try another email</FormFeedback>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup row>
+                                <Label for="examplePassword" style = {{color : "#bd535b"}} sm={3}>Password</Label>
+                                <Col sm={9}>
+                                    <Input invalid={this.state.passwordValid} innerRef={input => (this.password = input)} ref={this.password} type="password" name="password" id="examplePassword" placeholder="enter your password" />
+                                    <FormFeedback tooltip>Please, try another password</FormFeedback>
+                                </Col>
+                            </FormGroup>
+                        </Form>
+                        <Button onClick={this.performLogin} style = {{backgroundColor : "#ec5731", borderColor: "#ec5731", shadowColor: "#ec5731"}}>Login</Button>
+                        <Button style = {{marginTop : "5px", backgroundColor : "#eeb850", borderColor: "#eeb850"}} >Register</Button>
+                    </Card>
+
+            </Fade>
+        )
+    }
+}
+
+
+
+
+export default LoginCard
