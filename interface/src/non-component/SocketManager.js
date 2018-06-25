@@ -25,6 +25,7 @@ class SocketManager
                 case SocketManager.activitycode.login:
                     if(!(SocketManager.handlelogin === undefined))
                     {
+                        console.log("Receive Message")
                         SocketManager.handlelogin(JSON.parse(res.data))
                     }
                 default:

@@ -73,6 +73,7 @@ class App extends React.Component
         })
 
         SocketManager.initialize(this.myip,this.port)
+
     }
 
     toggleNavItem = async (num) =>

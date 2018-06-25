@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bodymovin": "^4.13.0",
     "bootstrap": "^4.1.1",
     "concurrently": "^3.5.1",
     "http": "0.0.0",
-    "lottie-web": "^5.1.16",
+    "lottie-web": "^5.1.18",
     "nodemon": "^1.17.5",
     "react": "^16.4.1",
     "react-block-ui": "^1.1.1",

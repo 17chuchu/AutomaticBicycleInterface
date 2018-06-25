@@ -72,6 +72,17 @@ class ClientManager(WebSocket):
         info["username"] = client.username
         info["password"] = ""
         info["email"] = client.email
+        return json.dumps(info)
+
+    @staticmethod
+    def validateToken(token):
+        diff = datetime.datetime.now() - ClientManager.__tokenTimer[token]
+        form = divmod(diff.days * 86400 + diff.seconds, 60)
+        return form[0] * 60 + form[1] > 60 * 60 * 12
+
+    @staticmethod
+    def refreshToken(token):
+        ClientManager.__tokenTimer[token] = datetime.datetime.now()
     '''
     @staticmethod
     def getUserId(token):

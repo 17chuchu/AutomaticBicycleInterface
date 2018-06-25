@@ -85,6 +85,27 @@
   z-index: 100;
 }
 
+.loginloading
+{
+  z-index: 120;
+}
+
+.cameraloading
+{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  float: none;
+  margin: 0 auto;
+  z-index: 130;
+  background-color: #fcf6e5;
+  width: 300px;
+  height: 300px;
+
+  margin-top: 100px;
+  border-radius: 100px;
+}
 
 
 .SearchBike-header {

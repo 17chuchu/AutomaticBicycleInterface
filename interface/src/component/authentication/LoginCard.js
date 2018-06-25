@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from 'react-dom'
+import LoginAnimation from '../../component/lottie/LoginAnimation'
 
 import {
     Card ,CardTitle, CardText, CardHeader
@@ -17,7 +18,9 @@ class LoginCard extends React.Component
     password = React.createRef();
 
     state = {
-        logincardmargin : "10px",
+        logincardmargin : "-600px",
+        loginpresent : false,
+        fadein : true,
 
         usernameInvalid : false,
         passwordValid : false,
@@ -29,6 +32,8 @@ class LoginCard extends React.Component
     {
         super(props)
         SocketManager.handlelogin = this.handlelogin
+
+
     }
 
     setmargin = async (margin) =>
@@ -38,40 +43,41 @@ class LoginCard extends React.Component
         })
     }
 
+    setfade = async (fade) =>
+    {
+        this.setState({fadein: fade})
+    }
+
     performLogin = async () =>
     {
-        var result = SocketManager.login(this.username.value,this.password.value)
+        this.setState({loginpresent : true})
+        SocketManager.login(this.username.value,this.password.value)
         this.password.value = ""
-        if(result === undefined)
-        {
-            this.setState({usernameInvalid : true, passwordValid : true})
-        }
-        else
-        {
-            this.setState({userinfo : result})
-        }
-
-        //this.props.userMode()
     }
 
     handlelogin = async (data) =>
     {
         if(data.comment == "Login Unsuccessful.")
         {
-            return undefined
+            this.setState({usernameInvalid : true, passwordValid : true})
         }
         else
         {
             SocketManager.token = data.comment
-            return JSON.parse(data.info)
+            this.props.loadUserInfo(JSON.parse(data.info))
+            this.props.userMode()
         }
+        this.setState({loginpresent : false})
     }
+
+
 
     render() {
         return (
-            <Fade in={true} >
+            <Fade in={this.state.fadein} >
                     <Card body className="text-center" style={{width: "500px", float: "right", marginRight: this.state.logincardmargin, marginTop: "10px",zIndex: "100", backgroundColor: "#fcf6e5"}}>
                         <CardTitle style = {{color : "#c34580"}}>Welcome</CardTitle>
+                        {this.state.loginpresent && <LoginAnimation/>}
                         <Form style={{marginTop: "20px"}} onSubmit = {this.performLogin}>
                             <FormGroup row>
                                 <Label for="exampleEmail" style = {{color : "#bd535b"}} sm={3}>Email</Label>
@@ -88,10 +94,9 @@ class LoginCard extends React.Component
                                 </Col>
                             </FormGroup>
                         </Form>
-                        <Button onClick={this.performLogin} style = {{backgroundColor : "#ec5731", borderColor: "#ec5731", shadowColor: "#ec5731"}}>Login</Button>
+                        <Button onClick={this.performLogin} type="submit" style = {{backgroundColor : "#ec5731", borderColor: "#ec5731", shadowColor: "#ec5731"}}>Login</Button>
                         <Button style = {{marginTop : "5px", backgroundColor : "#eeb850", borderColor: "#eeb850"}} >Register</Button>
                     </Card>
-
             </Fade>
         )
     }

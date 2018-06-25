@@ -11,12 +11,17 @@ import {
     , Fade
     , Form, FormGroup, Label, Col, Input
 } from 'reactstrap';
+import SocketManager from "../../non-component/SocketManager";
 
 class AuthenticationSet extends React.Component
 {
     bundle = React.createRef();
     loginCard = React.createRef();
     userCard = React.createRef();
+
+    state = {
+        userinfo : {username: "unknown",id: "unknown" ,email: "unknown"}
+    }
 
     constructor(props)
     {
@@ -41,8 +46,14 @@ class AuthenticationSet extends React.Component
 
         //localStorage.setItem('bikeappnum' + this.state.allBikeId.length, id)
         //!(localStorage.getItem('bikeappnum' + num) === null
-
-        this.loginMode()
+        if(SocketManager.token === undefined)
+        {
+            this.loginMode()
+        }
+        else
+        {
+            this.userMode()
+        }
         //this.userMode()
     }
 
@@ -50,12 +61,21 @@ class AuthenticationSet extends React.Component
     {
         this.loginCard.current.setmargin("10px")
         this.userCard.current.setmargin("-600px")
+        this.loginCard.current.setfade(true)
+        this.userCard.current.setfade(false)
     }
 
     userMode = async() =>
     {
         this.userCard.current.setmargin("10px")
         this.loginCard.current.setmargin("-600px")
+        this.loginCard.current.setfade(false)
+        this.userCard.current.setfade(true)
+    }
+
+    loadUserInfo = async(info) =>
+    {
+        this.setState({userinfo : info})
     }
 
     componentWillMount()
@@ -81,8 +101,8 @@ class AuthenticationSet extends React.Component
         return(
             <Fade in={this.props.loginTog} onExited={this.handleExisted} onEnter={this.handleEnter} style={{marginTop: "-60px"}}>
                 <div ref={this.bundle}>
-                    <LoginCard ref={this.loginCard} loginTog = {this.props.loginTog} toggleLogin = {this.props.toggleLogin} setBikeId = {this.props.setBikeId} setLoginButton = {this.props.setLoginButton} forceCollapse={this.props.forceCollapse} userMode={this.userMode}/>,
-                    <UserCard ref={this.userCard}/>
+                    <LoginCard ref={this.loginCard} loginTog = {this.props.loginTog} toggleLogin = {this.props.toggleLogin} setBikeId = {this.props.setBikeId} setLoginButton = {this.props.setLoginButton} forceCollapse={this.props.forceCollapse} userMode={this.userMode} loadUserInfo={this.loadUserInfo}/>,
+                    <UserCard ref={this.userCard} userInfo={this.state.userinfo} loginMode={this.loginMode}/>
                 </div>
             </Fade>
         )
