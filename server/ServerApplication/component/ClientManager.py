@@ -18,7 +18,7 @@ class ClientManager(WebSocket):
     status = False
 
     clients = []
-    port = 7000
+    port = 7001
 
     @staticmethod
     def initManager():

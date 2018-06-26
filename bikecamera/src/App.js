@@ -61,7 +61,7 @@ class App extends React.Component {
     }
 
     readyToCall() {
-        return this.webrtc.joinRoom('12345');
+        return this.webrtc.joinRoom('5abd2cc7-1f76-4ac9-858b-d55c085cb77b');
     }
 
     render() {
