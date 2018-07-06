@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Lottie from 'react-lottie';
-import * as animationData from './jsonfile/switch.json'
+import * as animationData from './jsonfile/toggle_switch.json'
 
 export default class SwitchAnimation extends React.Component {
 
@@ -9,35 +9,37 @@ export default class SwitchAnimation extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {isStopped: false, isPaused: false, segment: [0, 50], isOnOff: false,speed: 100};
+        this.state = {isPause: false,isStopped: false, isPaused: false, segment: [50, 100], isOnOff: false,shouldrender: true,speed: 200};
 
     }
 
     componentDidMount() {
-        this.animation.current.stop()
-        this.setState({})
+
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.shouldrender
     }
 
     sample = async () => {
-       if(this.state.isOnOff) {
-           this.setState({isOnOff: false, segment: [0, 50], speed: 1})
-           this.animation.current.play()
-           this.props.disconnectCall()
-       }
-       else {
-           this.setState({isOnOff: true, segment: [50, 100], speed: 1})
-           this.animation.current.play()
-           this.props.readyToCall()
-       }
+        this.state.shouldrender = true
+        if(this.state.isOnOff) {
+            this.setState({isOnOff: false, segment: [50, 100], speed: 3, isPaused: false,isStopped: false})
+            this.props.disconnectCall()
+        }
+        else {
+            this.setState({isOnOff: true, segment: [0, 50], speed: 3, isPaused: false,isStopped: false})
+            this.props.readyToCall()
+        }
+
     }
 
-    loadingmode = async () => {
-        this.setState({segment : [0,25]})
+    complete = async () =>
+    {
+        console.log("Finish")
+        this.state.shouldrender = false
     }
 
-    finishedmode = async () => {
-        this.setState({segment : [0,80]})
-    }
 
 
     render() {
@@ -48,22 +50,31 @@ export default class SwitchAnimation extends React.Component {
 
         const defaultOptions = {
             loop: false,
-            autoplay: true,
+            autoplay: false,
             animationData: animationData,
-
+            segmentStart: this.complete,
             rendererSettings: {
                 preserveAspectRatio: 'xMidYMid slice',
+            },
+            eventListeners: {
+                complete: this.complete
             }
         };
 
         return <div className="switchanimation" onClick={this.sample}>
             <Lottie ref={this.animation}
                     options={defaultOptions}
-                    height={30}
+                    eventListeners={[
+                        {
+                            eventName: 'complete',
+                            callback: () => this.complete(),
+                        },
+                    ]}
+                    height={38}
                     width={400}
-                    segments={this.state.segment}
                     isStopped={this.state.isStopped}
                     isPaused={this.state.isPaused}
+                    segments={this.state.segment}
                     isClickToPauseDisabled={true}
                     speed={this.state.speed}
             />

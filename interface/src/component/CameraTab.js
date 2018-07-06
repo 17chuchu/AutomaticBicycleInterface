@@ -7,20 +7,73 @@ import SwitchAnimation from '../component/lottie/SwitchAnimation'
 import SimpleWebRTC from 'simplewebrtc'
 import ReactDOM from 'react-dom'
 
+import $ from 'jquery';
+
+import { OpenVidu, Session, Stream } from 'openvidu-browser';
+
 
 import {
      TabPane, Fade
 } from 'reactstrap';
 
+
+function getToken(mySessionId) {
+    return createSession(mySessionId).then(sessionId => createToken(sessionId));
+}
+
+const OPENVIDU_SERVER_URL = "https://" + window.location.hostname + ":4443";
+
+function createSession(sessionId) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: OPENVIDU_SERVER_URL + "/api/sessions",
+            data: JSON.stringify({ customSessionId: sessionId }),
+            headers: {
+                "Authorization": "Basic " + btoa("OPENVIDUAPP:MY_SECRET"),
+                "Content-Type": "application/json"
+            },
+            success: response => resolve(response.id),
+            error: (error) => {
+                if (error.status === 409) {
+                    resolve(sessionId);
+                } else {
+                    console.warn('No connection to OpenVidu Server. This may be a certificate error at ' + OPENVIDU_SERVER_URL);
+                    if (window.confirm('No connection to OpenVidu Server. This may be a certificate error at \"' + OPENVIDU_SERVER_URL + '\"\n\nClick OK to navigate and accept it. ' +
+                            'If no certificate warning is shown, then check that your OpenVidu Server is up and running at "' + OPENVIDU_SERVER_URL + '"')) {
+                        window.location.assign(OPENVIDU_SERVER_URL + '/accept-certificate');
+                    }
+                }
+            }
+        });
+    });
+}
+
+function createToken(sessionId) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: OPENVIDU_SERVER_URL + "/api/tokens",
+            data: JSON.stringify({ session: sessionId }),
+            headers: {
+                "Authorization": "Basic " + btoa("OPENVIDUAPP:MY_SECRET"),
+                "Content-Type": "application/json"
+            },
+            success: response => resolve(response.token),
+            error: error => reject(error)
+        });
+    });
+}
+
+
+
+
 class CameraTab extends React.Component
 {
-    remotesource = undefined
+    OV = undefined;
+    session = undefined;
 
-    static tabRef = undefined
-
-    state = {
-        hasvideo: false
-    }
+    mySessionId = "12345567"
 
     constructor(props)
     {
@@ -28,58 +81,45 @@ class CameraTab extends React.Component
         CameraTab.tabRef = this
     }
 
-    componentDidMount() {
-        this.webrtc = new SimpleWebRTC({
-            url: 'http://10.2.1.172:8888'
-        });
-        this.webrtc.on('videoAdded', this.addVideo);
-        this.webrtc.on('videoRemoved', this.removeVideo);
-
-        console.log("webrtc component mounted");
-    }
-
-    addVideo = async (video, peer) => {
-        if(!this.state.hasvideo) {
-            //  console.log(this.refs.remotes);
-            var remotes = ReactDOM.findDOMNode(this.refs.remotes);
-            console.log(video);
-            if (remotes) {
-                var container = document.createElement('div');
-                container.style.transform = 'rotateY(-180deg)'
-                container.className = 'videoContainer';
-                container.id = 'container_' + this.webrtc.getDomId(peer);
-                container.appendChild(video);
-                // suppress contextmenu
-                video.oncontextmenu = function () {
-                    return false;
-                };
-                video.width = 800
-                video.muted = true
-                console.log(container);
-                remotes.appendChild(container);
-            }
-            this.webrtc.mute()
-            this.setState({hasvideo: true})
-        }
-    }
-
-    removeVideo = async(video, peer) => {
-        var remotes = ReactDOM.findDOMNode(this.refs.remotes);
-        var el = document.getElementById(peer ? 'container_' + this.webrtc.getDomId(peer) : 'localScreenContainer');
-        if (remotes && el) {
-            remotes.removeChild(el);
-        }
+    componentDidMount()
+    {
+        this.OV = new OpenVidu()
     }
 
     readyToCall = async () => {
-        console.log("Connect to room");
-        return this.webrtc.joinRoom('5abd2cc7-1f76-4ac9-858b-d55c085cb77b');
+        this.OV = new OpenVidu()
+        this.session = this.OV.initSession()
+        getToken(this.mySessionId).then(token => {
+
+            // First param is the token got from OpenVidu Server. Second param can be retrieved by every user on event
+            // 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
+            console.log("The token is : \n" +token)
+            this.session.connect(token, { clientData: "asdfasdf" })
+
+        });
+
+        this.session.on('streamCreated', event => {
+
+            // Subscribe to the Stream to receive it. HTML video will be appended to element with 'video-container' id
+            var subscriber = this.session.subscribe(event.stream, 'remoteVideos');
+            subscriber.on('videoElementCreated', event => {
+                console.log("Video Begin.")
+            });
+        });
+
+        this.session.on('streamDestroyed', event => {
+
+            // Delete the HTML element with the user's nickname. HTML videos are automatically removed from DOM
+            console.log("stream destroyed")
+        });
     }
 
     disconnectCall = async () => {
-        console.log("Disconnect from room");
-        return this.webrtc.leaveRoom();
+        this.session.disconnect();
+        this.OV = undefined;
+        this.session = undefined;
     }
+
 
 
 

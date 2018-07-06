@@ -8,29 +8,30 @@ import uuid
 import datetime
 import time
 
-from ServerApplication.component.Comment.Comment import Comment
+from ServerApplication.component.Comment.ClientComment import ClientComment
 from ServerApplication.component.SpecialStructure.SpecialDict import SpecialDict
+from ServerApplication.component.BicycleManager import BicycleManager
 from ServerApplication.component.Tag.AutorityTag import AutorityTag
 from ServerApplication.models import Client
 
 
 class ClientManager(WebSocket):
     status = False
+    clientport = 7001
 
     clients = []
-    port = 7001
 
     @staticmethod
     def initManager():
         if(ClientManager.status == False):
-            thread = threading.Thread(target=ClientManager.runSocket)
+            thread = threading.Thread(target=ClientManager.runClientSocket)
             thread.start()
-            print('WebSocket starts at port 7000.')
+            print('WebSocket starts at port ' + str(ClientManager.clientport))
             ClientManager.status = True
 
     @staticmethod
-    def runSocket():
-        server = SimpleWebSocketServer('', ClientManager.port, ClientManager)
+    def runClientSocket():
+        server = SimpleWebSocketServer('', ClientManager.clientport, ClientManager)
         server.serveforever()
         pass
 
@@ -38,24 +39,31 @@ class ClientManager(WebSocket):
 
 
     def handleMessage(self):
+        print('-- Client Message Incoming --')
         try:
             obj = json.loads(self.data)
-            if(obj['code'] == 1):
+            print(obj)
+            if(obj['code'] == ClientComment.Login):
                 self.sendMessage(json.dumps(ClientManager.login(obj['pack'])))
+            elif(obj['code'] == ClientComment.CheckBike):
+                self.sendMessage(json.dumps(ClientManager.checkbike(obj['pack'])))
+
         except Exception as e:
-            print(e)
+            print("Client Message Error :",e)
 
 
 
         #self.sendMessage(self.data)
 
     def handleConnected(self):
+        print('-- Client Connection Incoming --')
         ClientManager.clients.append(self)
-        print('Connection Successful :', self.address)
+        print('Client Connection Successful :', self.address)
 
     def handleClose(self):
         ClientManager.clients.remove(self)
-        print('Close Socket Successful :', self.address)
+        print('-- Client Disconnection Incoming --')
+        print('Close ClientSocket Successful :', self.address)
 
 
 
@@ -141,13 +149,13 @@ class ClientManager(WebSocket):
         elif ("email" in data):
             userlist = Client.objects.filter(email=data["email"], password=data["password"])
         else:
-            return Comment.generateLoginComment("Login Unsuccessful.")
+            return ClientComment.generateLoginComment("Login Unsuccessful.")
 
 
         if (len(userlist) != 0):
             loginUser = userlist[0]
         else:
-            return Comment.generateLoginComment("Login Unsuccessful.")
+            return ClientComment.generateLoginComment("Login Unsuccessful.")
 
         if (loginUser.id in ClientManager.__loginUser):
 
@@ -156,9 +164,30 @@ class ClientManager(WebSocket):
             authToken = str(uuid.uuid4()).replace("-", "")
             ClientManager.__loginUser[authToken] = loginUser.id
 
-        token = Comment.generateLoginComment(authToken)
+        token = ClientComment.generateLoginComment(authToken)
         ClientManager.refreshToken(authToken)
         userlist[0].password = ""
         token['info'] = ClientManager.clienttoString(userlist[0])
 
         return token
+
+    @staticmethod
+    def checkbike(request):
+        data = json.loads(request)
+        pack = dict()
+        pack["isBikeOnline"] = "Offline"
+        pack["bikeid"] = data["bikeid"]
+
+        if("bikeid" in data):
+            if(data["bikeid"] in BicycleManager.bicycleid):
+                pack["isBikeOnline"] = "Online"
+
+        comment = ClientComment.generateCheckBikeComment(pack)
+        return comment
+
+    @staticmethod
+    def broadcastbike(id,isOnline):
+        data = json.loads(request)
+        pack = dict()
+        pack["isBikeOnline"] = "Offline"
+        pack["bikeid"] = data["bikeid"]

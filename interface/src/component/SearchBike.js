@@ -1,11 +1,23 @@
 import React from "react"
 
 import {
-    TabPane, Fade, Button, Collapse, Row, Col ,InputGroup ,Input, InputGroupAddon, Form
+    TabPane, Fade, Button, Collapse, Row, Col ,InputGroup ,Input, InputGroupAddon, Form, Badge
 } from 'reactstrap';
+import SocketManager from "../non-component/SocketManager";
 
 class SearchBike extends React.Component
 {
+    state = {
+        isBikeOnline: "Offline"
+    }
+    //(this.props.bikeonline) ? "Online" : "Offline"
+
+    constructor()
+    {
+        super()
+        SocketManager.handlecheckbike = this.handleCheckBike
+    }
+
 
     addNewBikeId = async (e) =>{
         e.preventDefault()
@@ -19,16 +31,20 @@ class SearchBike extends React.Component
         this.props.setBikeId(id)
     }
 
+    handleCheckBike = async (info) => {
+        this.setState({isBikeOnline : info.pack.isBikeOnline})
+    }
+
     render()
     {
         var data = this.props.allBike;
 
         return([
                 <div className="SearchBike-header">
-                    <Button color="link" onClick={this.props.toggleCollapse} style = {{fontSize : "20px", color : "#da89a2",  textDecoration: 'none'}}>{this.props.bikeid}</Button>
+                    <Button color="link" onClick={this.props.toggleCollapse} style = {{fontSize : "20px", color : "#da89a2",  textDecoration: 'none'}}>{this.props.bikeid}<Badge color={(this.state.isBikeOnline === "Online") ? "success" : "secondary"} style={{marginLeft: "15px"}}>{this.state.isBikeOnline}</Badge></Button>
                 </div>,
 
-                <Collapse isOpen = {this.props.collapsesearch}  >
+                <Collapse isOpen = {this.props.collapsesearch}>
                     {
                         data.map(function(element,i){
                             return <EachId id = {element} setBikeId={this.props.setBikeId} removeBikeId={this.props.removeBikeId}/>

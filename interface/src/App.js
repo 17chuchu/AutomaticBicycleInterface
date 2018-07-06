@@ -36,6 +36,7 @@ class App extends React.Component
     port = 7001
 
     searchbike = React.createRef();
+    authenticationset = React.createRef();
 
     static = {
         activeNavItem: "App-nevItem-active",
@@ -109,6 +110,8 @@ class App extends React.Component
     setBikeId = async (id) =>
     {
         this.setState({selectedbike : id})
+        SocketManager.selectedBike = idd
+        SocketManager.checkbike(id)
     }
 
     addBikeId = async (id) =>

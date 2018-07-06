@@ -114,9 +114,12 @@
   flex-wrap: wrap;
 
   float: none;
-  margin: 0 auto;
+  margin: auto;
+  margin-bottom: 5px;
+  margin-top: -5px;
 
-  width: 200px;
+
+  width: 150px;
 }
 
 

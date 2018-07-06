@@ -57,7 +57,7 @@ class LoginCard extends React.Component
 
     handlelogin = async (data) =>
     {
-        if(data.comment == "Login Unsuccessful.")
+        if(data.pack == "Login Unsuccessful.")
         {
             this.setState({usernameInvalid : true, passwordValid : true})
         }
