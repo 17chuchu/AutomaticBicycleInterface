@@ -17,8 +17,8 @@
       <file leaf-file-name="BicycleManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ServerApplication/component/BicycleManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
+            <state relative-caret-position="-445">
+              <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
               <folding>
                 <element signature="e#0#66#0" expanded="true" />
               </folding>
@@ -97,6 +97,7 @@
       <find>send</find>
       <find>uuid</find>
       <find>want</find>
+      <find>thread</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -518,13 +519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ServerApplication/component/Comment/BikeComment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="21" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ServerApplication/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -556,10 +550,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ServerApplication/component/Comment/BikeComment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ServerApplication/component/BicycleManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
+        <state relative-caret-position="-445">
+          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
           <folding>
             <element signature="e#0#66#0" expanded="true" />
           </folding>
