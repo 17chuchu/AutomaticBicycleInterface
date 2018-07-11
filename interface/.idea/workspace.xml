@@ -14,11 +14,75 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-191">
-              <caret line="112" column="40" lean-forward="false" selection-start-line="112" selection-start-column="40" selection-end-line="112" selection-end-column="40" />
+            <state relative-caret-position="1695">
+              <caret line="113" column="35" lean-forward="false" selection-start-line="113" selection-start-column="35" selection-end-line="113" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CameraTab.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/component/CameraTab.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="87">
+              <caret line="69" column="58" lean-forward="false" selection-start-line="69" selection-start-column="58" selection-end-line="69" selection-end-column="58" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simplewebrtc-with-adapter.bundle.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/simplewebrtc/out/simplewebrtc-with-adapter.bundle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7">
+              <caret line="19116" column="12" lean-forward="false" selection-start-line="19116" selection-start-column="12" selection-end-line="19116" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simplewebrtc.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_modules/simplewebrtc/src/simplewebrtc.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="12" lean-forward="false" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RealtimeTab.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/component/RealtimeTab.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SocketManager.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/non-component/SocketManager.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1110">
+              <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwitchAnimation.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/component/lottie/SwitchAnimation.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="31" column="34" lean-forward="false" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -27,23 +91,9 @@
       <file leaf-file-name="SearchBike.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/SearchBike.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="50" column="32" lean-forward="false" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CameraTab.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/component/CameraTab.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="820">
-              <caret line="75" column="27" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="180">
+              <caret line="17" column="37" lean-forward="false" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -51,7 +101,7 @@
       <file leaf-file-name="App.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
+            <state relative-caret-position="2655">
               <caret line="177" column="19" lean-forward="false" selection-start-line="177" selection-start-column="1" selection-end-line="177" selection-end-column="19" />
               <folding />
             </state>
@@ -69,36 +119,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setitem</find>
-      <find>email</find>
-      <find>ref</find>
-      <find>lottie-web</find>
-      <find>login</find>
-      <find>searchb</find>
-      <find>loginl</find>
-      <find>cameratab</find>
-      <find>SocketManager</find>
-      <find>toggleLogin</find>
-      <find>camera</find>
-      <find>scaleMode</find>
-      <find>preserveAspectRatio</find>
-      <find>id</find>
-      <find>readyToCall</find>
-      <find>local</find>
-      <find>props</find>
       <find>initialize</find>
       <find>thread</find>
       <find>handleLogin</find>
       <find>loaduser</find>
-      <find>token</find>
       <find>hasvideo</find>
       <find>animation</find>
       <find>switch</find>
       <find>setState</find>
       <find>pack</find>
-      <find>remote</find>
       <find>CameraTabContainer</find>
       <find>webrtc</find>
+      <find>searchbike</find>
+      <find>color</find>
+      <find>idd</find>
+      <find>loginUser</find>
+      <find>token</find>
+      <find>addbike</find>
+      <find>createToken</find>
+      <find>SocketManager.token</find>
+      <find>readyToCall</find>
+      <find>ClineRoom</find>
+      <find>checkbike</find>
+      <find>info</find>
+      <find>BeginCall</find>
+      <find>askforvideo</find>
+      <find>camera</find>
+      <find>remote</find>
+      <find>remotes</find>
+      <find>SocketManager</find>
+      <find>event</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -118,17 +168,17 @@
         <option value="$PROJECT_DIR$/src/component/authentication/ClientObject.js" />
         <option value="$PROJECT_DIR$/src/component/authentication/object/ClientObject.js" />
         <option value="$PROJECT_DIR$/src/component/lottie/Animation.js" />
-        <option value="$PROJECT_DIR$/src/component/authentication/AuthenticationSet.js" />
         <option value="$PROJECT_DIR$/src/component/authentication/UserCard.js" />
         <option value="$PROJECT_DIR$/src/component/lottie/CameraAnimation.js" />
         <option value="$PROJECT_DIR$/src/component/lottie/LoginAnimation.js" />
+        <option value="$PROJECT_DIR$/src/component/authentication/AuthenticationSet.js" />
         <option value="$PROJECT_DIR$/src/component/authentication/LoginCard.js" />
-        <option value="$PROJECT_DIR$/src/non-component/SocketManager.js" />
         <option value="$PROJECT_DIR$/src/component/SearchBike.js" />
+        <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/component/lottie/SwitchAnimation.js" />
+        <option value="$PROJECT_DIR$/src/non-component/SocketManager.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/component/CameraTab.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
       </list>
     </option>
   </component>
@@ -215,6 +265,12 @@
               <item name="component" type="462c0819:PsiDirectoryNode" />
               <item name="lottie" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="interface" type="b2602c69:ProjectViewProjectNode" />
+              <item name="interface" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="non-component" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -227,7 +283,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
-    <property name="SearchEverywhereHistoryKey" value="initialize&#9;null&#9;null&#10;SocketManager&#9;FILE&#9;file:///Users/slimshady23/GitHubProject/AutomaticBicycleInterface/interface/src/non-component/SocketManager.js&#10;localhost&#9;null&#9;null&#10;ws://localhost:7000&#9;null&#9;null&#10;socket&#9;FILE&#9;file:///Users/slimshady23/GitHubProject/AutomaticBicycleInterface/interface/src/non-component/SocketManager.js" />
+    <property name="SearchEverywhereHistoryKey" value="remoteVideos&#9;null&#9;null&#10;checkbike&#9;null&#9;null&#10;SocketManager&#9;FILE&#9;file:///Users/slimshady23/GitHubProject/AutomaticBicycleInterface/interface/src/non-component/SocketManager.js&#10;SocketManager.token&#9;null&#9;null&#10;initialize&#9;null&#9;null&#10;localhost&#9;null&#9;null&#10;ws://localhost:7000&#9;null&#9;null&#10;socket&#9;FILE&#9;file:///Users/slimshady23/GitHubProject/AutomaticBicycleInterface/interface/src/non-component/SocketManager.js" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -284,11 +340,15 @@
       <workItem from="1530520819916" duration="15589000" />
       <workItem from="1530782063684" duration="5502000" />
       <workItem from="1530866439960" duration="731000" />
+      <workItem from="1530961978673" duration="2437000" />
+      <workItem from="1531127404444" duration="431000" />
+      <workItem from="1531141615634" duration="17118000" />
+      <workItem from="1531313351581" duration="4380000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="207274000" />
+    <option name="totallyTimeSpent" value="231640000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -298,8 +358,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29647058" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -309,7 +369,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10941176" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23529412" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -326,20 +386,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/react-block-ui/lib/Loader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/react-block-ui/lib/redux.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/react-block-ui/lib/ReduxBlockUi.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
@@ -529,13 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/RealtimeTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/component/lottie/jsonfile/cycle_animation.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -592,16 +631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/authentication/AuthenticationSet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="77" column="38" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="38" />
-          <folding>
-            <element signature="e#3#28#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/component/authentication/object/ClientObject.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -613,13 +642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="533">
           <caret line="45" column="21" lean-forward="false" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/authentication/LoginCard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="65" column="46" lean-forward="false" selection-start-line="65" selection-start-column="39" selection-end-line="65" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -637,62 +659,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/non-component/SocketManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-79">
-          <caret line="45" column="54" lean-forward="false" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="15" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/authentication/AuthenticationSet.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="47" column="61" lean-forward="false" selection-start-line="47" selection-start-column="61" selection-end-line="47" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/authentication/LoginCard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="64" column="9" lean-forward="false" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/SearchBike.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="17" column="37" lean-forward="false" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/RealtimeTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2655">
+          <caret line="177" column="19" lean-forward="false" selection-start-line="177" selection-start-column="1" selection-end-line="177" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/non-component/SocketManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1110">
+          <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/lottie/SwitchAnimation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="773">
-          <caret line="72" column="30" lean-forward="false" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/SearchBike.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="50" column="32" lean-forward="false" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/CameraTab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="820">
-          <caret line="75" column="27" lean-forward="false" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="177" column="19" lean-forward="false" selection-start-line="177" selection-start-column="1" selection-end-line="177" selection-end-column="19" />
+        <state relative-caret-position="34">
+          <caret line="31" column="34" lean-forward="false" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-191">
-          <caret line="112" column="40" lean-forward="false" selection-start-line="112" selection-start-column="40" selection-end-line="112" selection-end-column="40" />
+        <state relative-caret-position="1695">
+          <caret line="113" column="35" lean-forward="false" selection-start-line="113" selection-start-column="35" selection-end-line="113" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/simplewebrtc/src/simplewebrtc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="12" lean-forward="false" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/simplewebrtc/out/simplewebrtc-with-adapter.bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="19116" column="12" lean-forward="false" selection-start-line="19116" selection-start-column="12" selection-end-line="19116" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/CameraTab.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="69" column="58" lean-forward="false" selection-start-line="69" selection-start-column="58" selection-end-line="69" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

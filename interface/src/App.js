@@ -110,7 +110,7 @@ class App extends React.Component
     setBikeId = async (id) =>
     {
         this.setState({selectedbike : id})
-        SocketManager.selectedBike = idd
+        SocketManager.selectedBike = id
         SocketManager.checkbike(id)
     }
 
@@ -135,6 +135,38 @@ class App extends React.Component
         this.setState(this.state.allBikeId)
     }
 
+    updown = [];
+    leftright = [];
+
+    handleKeyUp = async (event) => {
+        if(event.key == 's'){
+            console.log('enter press here! ')
+        }
+        if(event.key == 'w'){
+            console.log('enter press here! ')
+        }
+        if(event.key == 'd'){
+            console.log('enter press here! ')
+        }
+        if(event.key == 'a'){
+            console.log('enter press here! ')
+        }
+    }
+
+    handleKeyDown = async (event) => {
+        if(event.key == 's'){
+            this.updown.append("down")
+        }
+        if(event.key == 'w'){
+            this.updown.append("up")
+        }
+        if(event.key == 'd'){
+            this.leftright.append("right")
+        }
+        if(event.key == 'a'){
+            this.leftright.append("left")
+        }
+    }
 
 
     render()
@@ -142,6 +174,7 @@ class App extends React.Component
         let status = this.state.navitemstatus
         return (
             <div className="Theme-color">
+                <Button onKeyUp={this.handleKeyUp} onKeyDown={this.handleKeyDown}>Button</Button>
                 <div className="loginTheme">
                     <Button color="secondary"  onClick={!this.state.loginButtonDisable ? this.toggleLogin : this.donothingfunction} style = {{ height : "45px", width : "200px",color: "#509f98",backgroundColor: "#fcf6e5" ,fontWeight: "500", fontSize : "20px",marginTop: "10px", marginRight: "10px",float : "right",  textDecoration: 'none'}} >visitor</Button>
                     <AuthenticationSet loginTog = {this.state.loginTog} toggleLogin = {this.toggleLogin} setBikeId = {this.setBikeId} setLoginButton = {this.setLoginButton} forceCollapse={this.forceCollapse}/>

@@ -21,6 +21,7 @@
     "redux": "^4.0.0",
     "roslib": "^0.20.0",
     "simplewebrtc": "^3.0.1",
+    "uuid": "^3.3.2",
     "video-react": "^0.11.2",
     "webrtc-adapter": "^6.2.1",
     "ws": "^5.2.0"

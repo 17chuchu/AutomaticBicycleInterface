@@ -13,6 +13,7 @@ import uuid
 import requests
 import ssl
 # Create your views here.
+from ServerApplication.component.BicycleManager import BicycleManager
 
 
 def index(request):
@@ -22,14 +23,16 @@ def index(request):
 class Register(APIView):
 
     def get(self,request):
+        print("Is called")
+        roomid = '123455'
+        myip = "localhost"
+        sessionid = BicycleManager.createBikeRoom(roomid, myip)
+        if (sessionid == 'create session unsuccessful'):
 
-        url = 'https://' + 'localhost' + ':4443/api/tokens'
-        data = {'session':'eejraohtbyuj0q76'}
-        header = {
-                'Authorization': "Basic " + base64.b64encode(b"OPENVIDUAPP:MY_SECRET").decode("utf-8", "ignore"),
-                'Content-Type': 'application/json'
-            }
-        print("Ready to send")
-        r = requests.post(url=url,data=json.dumps(data),headers=header, verify=False)
-        print(r.json())
-        return HttpResponse("Response!!!")
+            loop = True
+        token = BicycleManager.createJoinRequest(sessionid, myip)
+        if (sessionid == 'session can not be join'):
+            loop = True
+        loop = False
+        print(token)
+        return HttpResponse("Its fine")

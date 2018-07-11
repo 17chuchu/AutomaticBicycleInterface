@@ -63,7 +63,6 @@ class LoginCard extends React.Component
         }
         else
         {
-            SocketManager.token = data.comment
             this.props.loadUserInfo(JSON.parse(data.info))
             this.props.userMode()
         }

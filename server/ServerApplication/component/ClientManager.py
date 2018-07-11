@@ -47,6 +47,8 @@ class ClientManager(WebSocket):
                 self.sendMessage(json.dumps(ClientManager.login(obj['pack'])))
             elif(obj['code'] == ClientComment.CheckBike):
                 self.sendMessage(json.dumps(ClientManager.checkbike(obj['pack'])))
+            elif(obj['code'] == ClientComment.AskForVideo):
+                self.sendMessage(json.dumps(ClientManager.askforvideo(obj['pack'])))
 
         except Exception as e:
             print("Client Message Error :",e)
@@ -186,8 +188,59 @@ class ClientManager(WebSocket):
         return comment
 
     @staticmethod
+    def askforvideo(request):
+        data = json.loads(request)
+
+        sessionid = BicycleManager.bicycleroom[data['bikeid']]
+        print("Session id is", sessionid)
+
+        token = BicycleManager.createJoinRequest(sessionid)
+        if (token == 'session can not be join'):
+            print('Session :', sessionid, 'can not be join :')
+
+        data['token'] = token
+        return ClientComment.generateAskForVideo(data)
+
+
+    @staticmethod
     def broadcastbike(id,isOnline):
         data = json.loads(request)
         pack = dict()
         pack["isBikeOnline"] = "Offline"
         pack["bikeid"] = data["bikeid"]
+
+
+        '''
+        data = json.loads(request)
+
+        roomid = BicycleManager.bicycleroom[data['bikeid']]
+
+        sessionid = BicycleManager.createBikeRoom(roomid)
+        if (sessionid == 'create session unsuccessful'):
+            print("Bike :", data['comment'], "want to publish a room.")
+            loop = True
+        print("Session ID :", sessionid)
+        token = BicycleManager.createJoinRequest(sessionid)
+        if (token == 'session can not be join'):
+            loop = True
+        loop = False
+        data['token'] = token
+        print(token)
+
+        comment = ClientComment.generateAskForVideo(data)
+        return comment'''
+
+
+        '''
+        data = json.loads(request)
+
+        sessionid = BicycleManager.bicycleroom[data['bikeid']]
+        print("Session id is",sessionid)
+
+        token = BicycleManager.createJoinRequest(sessionid)
+        if (token == 'session can not be join'):
+                print('Session :',sessionid,'can not be join :')
+
+        data['token'] = token
+        return ClientComment.generateAskForVideo(data)
+        '''

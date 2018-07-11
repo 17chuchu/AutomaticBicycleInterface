@@ -11,11 +11,15 @@ class SocketManager
 
     static handlelogin = undefined
     static handlecheckbike = undefined
+    static handleaskforvideo = undefined
+
+    static targeturl = undefined
 
     static activitycode = {
         default :   0,
         login   :   1,
         checkbike:  2,
+        askforvideo:3,
     }
 
     static initialize(ip,port)
@@ -26,22 +30,20 @@ class SocketManager
         });
 
         SocketManager.client.addEventListener('message', (res) => {
-            var data = JSON.parse(res.data)
-            switch(data.code) {
+            var info = JSON.parse(res.data)
+            console.log(info)
+            switch(info.code) {
                 case SocketManager.activitycode.login:
-                    var info = JSON.parse(res.data)
-
-                    SocketManager.token = info.comment
+                    SocketManager.token = info.pack
                     SocketManager.loginUser = JSON.parse(info.info)
 
                     if(!(SocketManager.handlelogin === undefined))
                     {
                         SocketManager.handlelogin(info)
                     }
+                    break
 
                 case SocketManager.activitycode.checkbike:
-                    var info = JSON.parse(res.data)
-
                     SocketManager.selectedBike = info.pack.bikeid
                     SocketManager.isBikeOnline = info.pack.isBikeOnline
 
@@ -49,6 +51,15 @@ class SocketManager
                     {
                         SocketManager.handlecheckbike(info)
                     }
+                    break
+
+                case SocketManager.activitycode.askforvideo:
+                    if(!(SocketManager.handleaskforvideo === undefined))
+                    {
+                        SocketManager.handleaskforvideo(info)
+                    }
+                    break
+
                 default:
                     return null;
             }
@@ -76,9 +87,18 @@ class SocketManager
         const info = {bikeid : id}
         const data = JSON.stringify(info)
         const pack = SocketManager.packMassage(SocketManager.activitycode.checkbike,data)
-        SocketManager.client.send(pack)
 
+        SocketManager.client.send(pack)
     }
+
+    static askforvideo(id)
+    {
+        const info = {bikeid : id}
+        const data = JSON.stringify(info)
+        const pack = SocketManager.packMassage(SocketManager.activitycode.askforvideo,data)
+        SocketManager.client.send(pack)
+    }
+
 }
 
 

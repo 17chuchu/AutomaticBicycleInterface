@@ -22,7 +22,7 @@ class BicycleManager(WebSocket):
 
     bicycleclient = SpecialDict()
     bicycleid = SpecialDict()
-    bicycleroom = SpecialDict()
+    bicycleroom = dict()
 
     bicycleport = 7010
 
@@ -53,27 +53,27 @@ class BicycleManager(WebSocket):
 
             if(data['topic'] == 'requestopenroom'):
                 roomid = str(uuid.uuid4()).replace('-', '')
+                print("Bike :",data['comment'],"want to publish to room",roomid)
 
-                print("Bike :",data['comment'],"want to publish a room.")
-                BicycleManager.bicycleroom[roomid] = data['comment']
-
-                def createRoom(roomid,myip):
+                def createRoom(roomid):
 
                     loop = True
                     while(loop):
-                        sessionid = BicycleManager.createBikeRoom(roomid,myip)
+                        sessionid = BicycleManager.createBikeRoom(roomid)
+                        BicycleManager.bicycleroom[data['comment']] = sessionid
                         if(sessionid == 'create session unsuccessful'):
                             print("Bike :", data['comment'], "want to publish a room.")
                             loop = True
-                        token = BicycleManager.createJoinRequest(sessionid,myip)
-                        if(sessionid == 'session can not be join'):
+                        token = BicycleManager.createJoinRequest(sessionid)
+                        if(token == 'session can not be join'):
                             loop = True
                         loop = False
                         data['topic'] = 'openroomtoken'
                         data['comment'] = token
+                        print(token)
                         self.sendMessage(json.dumps(data))
 
-                thread = threading.Thread(target=lambda: createRoom(roomid, "10.2.1.178"))
+                thread = threading.Thread(target=lambda: createRoom(roomid))
                 thread.start()
 
         except Exception as e:
@@ -90,10 +90,10 @@ class BicycleManager(WebSocket):
             BicycleManager.bicycleid[str(self.address)] = "undefined"
             print('Bicycle Connection Successful :', self.address)
 
-            comment = BikeComment.generateLoginComment("None","id","None")
+            comment = BikeComment.generateComment("None", "id", "None")
             self.sendMessage(json.dumps(comment))
 
-            comment = BikeComment.generateLoginComment("None","requestopenroom","None")
+            comment = BikeComment.generateComment("None", "requestopenroom", "None")
             self.sendMessage(json.dumps(comment))
 
         except Exception as e:
@@ -139,11 +139,11 @@ class BicycleManager(WebSocket):
         BicycleManager.__tokenTimer[token] = datetime.datetime.now()
 
     @staticmethod
-    def createBikeRoom(roomid, myip):
-        url = 'https://' + myip + ':4443/api/sessions'
+    def createBikeRoom(roomid):
+        url = 'https://versuch.ess-project.ovgu.de:4443/api/sessions'
         data = {'session': roomid}
         header = {
-            'Authorization': "Basic " + base64.b64encode(b"OPENVIDUAPP:MY_SECRET").decode("utf-8", "ignore"),
+            'Authorization': "Basic " + base64.b64encode(b"OPENVIDUAPP:Jochen").decode("utf-8", "ignore"),
             'Content-Type': 'application/json'
         }
         r = requests.post(url=url, data=json.dumps(data), headers=header, verify=False)
@@ -151,21 +151,24 @@ class BicycleManager(WebSocket):
         data = r.json()
         if('id' in data):
             return data['id']
+
         return 'create session unsuccessful'
 
     @staticmethod
-    def createJoinRequest(roomid, myip):
-        url = 'https://' + myip + ':4443/api/tokens'
+    def createJoinRequest(roomid):
+        url = 'https://versuch.ess-project.ovgu.de:4443/api/tokens'
         data = {'session': roomid}
         header = {
-            'Authorization': "Basic " + base64.b64encode(b"OPENVIDUAPP:MY_SECRET").decode("utf-8", "ignore"),
+            'Authorization': "Basic " + base64.b64encode(b"OPENVIDUAPP:Jochen").decode("utf-8", "ignore"),
             'Content-Type': 'application/json'
         }
         r = requests.post(url=url, data=json.dumps(data), headers=header, verify=False)
 
         data = r.json()
+        print(data)
         if('error' in data):
             return "session can not be join"
+        print(data)
         return data['token']
 
     '''
