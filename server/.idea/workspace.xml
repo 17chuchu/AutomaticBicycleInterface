@@ -26,8 +26,8 @@
       <file leaf-file-name="BicycleManager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ServerApplication/component/BicycleManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1919">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="256">
+              <caret line="145" column="77" selection-start-line="145" selection-start-column="71" selection-end-line="145" selection-end-column="77" />
               <folding>
                 <element signature="e#0#66#0" expanded="true" />
               </folding>
@@ -283,7 +283,7 @@
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="11" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.30060607" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.30060607" />
       <window_info anchor="bottom" id="Terminal" order="12" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3118741" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
@@ -589,8 +589,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ServerApplication/component/BicycleManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1919">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="256">
+          <caret line="145" column="77" selection-start-line="145" selection-start-column="71" selection-end-line="145" selection-end-column="77" />
           <folding>
             <element signature="e#0#66#0" expanded="true" />
           </folding>
