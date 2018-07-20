@@ -22,16 +22,17 @@ export default class SwitchAnimation extends React.Component {
     }
 
     sample = async () => {
-        this.state.shouldrender = true
-        if(this.state.isOnOff) {
-            this.setState({isOnOff: false, segment: [50, 100], speed: 3, isPaused: false,isStopped: false})
-            this.props.disconnectCall()
+        if(!this.props.isLock) {
+            this.state.shouldrender = true
+            if (this.state.isOnOff) {
+                this.setState({isOnOff: false, segment: [50, 100], speed: 3, isPaused: false, isStopped: false})
+                this.props.disconnectCall()
+            }
+            else {
+                this.setState({isOnOff: true, segment: [0, 50], speed: 3, isPaused: false, isStopped: false})
+                this.props.readyToCall()
+            }
         }
-        else {
-            this.setState({isOnOff: true, segment: [0, 50], speed: 3, isPaused: false,isStopped: false})
-            this.props.readyToCall()
-        }
-
     }
 
     complete = async () =>

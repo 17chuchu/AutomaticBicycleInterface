@@ -1,0 +1,51 @@
+/*
+  white : #e0e2e4
+  pink  : #da89a2
+  black : #22282c
+  green : #5cc884
+  creme : #fcf6e5
+*/
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.VideoBox {
+  background-color: #22282C;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.TextBox
+{
+  color: #fcf6e5;
+  font-size: 20px;
+  margin-top: 40px;
+  margin-right: 50px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

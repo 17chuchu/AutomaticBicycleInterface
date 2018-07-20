@@ -20,9 +20,11 @@ from ServerApplication.models import Client
 class BicycleManager(WebSocket):
     status = False
 
+    MeansManagerReference = None
+
     bicycleclient = SpecialDict()
     bicycleid = SpecialDict()
-    bicycleroom = dict()
+    bicycleroom = SpecialDict()
 
     bicycleport = 7010
 
@@ -52,34 +54,13 @@ class BicycleManager(WebSocket):
                 BicycleManager.bicycleid[str(self.address)] = data['comment']
 
             if(data['topic'] == 'requestopenroom'):
-                roomid = str(uuid.uuid4()).replace('-', '')
-                print("Bike :",data['comment'],"want to publish to room",roomid)
-
-                def createRoom(roomid):
-
-                    loop = True
-                    while(loop):
-                        sessionid = BicycleManager.createBikeRoom(roomid)
-                        BicycleManager.bicycleroom[data['comment']] = sessionid
-                        if(sessionid == 'create session unsuccessful'):
-                            print("Bike :", data['comment'], "want to publish a room.")
-                            loop = True
-                        token = BicycleManager.createJoinRequest(sessionid)
-                        if(token == 'session can not be join'):
-                            loop = True
-                        loop = False
-                        data['topic'] = 'openroomtoken'
-                        data['comment'] = token
-                        print(token)
-                        self.sendMessage(json.dumps(data))
-
-                thread = threading.Thread(target=lambda: createRoom(roomid))
-                thread.start()
-
+                print("Bike :",data['comment'],"want to publish to a room.")
+                bikeid = data['comment']
+                BicycleManager.MeansManagerReference.registerNewRoom(bikeid)
+                comment = BikeComment.generateComment('','openroomtoken',BicycleManager.bicycleroom[bikeid])
+                self.sendMessage(json.dumps(comment))
         except Exception as e:
             print("Message error is : " + e)
-
-
 
         #self.sendMessage(self.data)
 
@@ -114,62 +95,6 @@ class BicycleManager(WebSocket):
         except Exception as e:
             print("Message error is : " + e)
 
-    __loginUser = SpecialDict()
-    __tokenTimer = dict()
-
-
-    @staticmethod
-    def clienttoString(client):
-        info = dict()
-        info["id"] = client.id
-        info["autoritytag"] = client.autoritytag
-        info["username"] = client.username
-        info["password"] = ""
-        info["email"] = client.email
-        return json.dumps(info)
-
-    @staticmethod
-    def validateToken(token):
-        diff = datetime.datetime.now() - BicycleManager.__tokenTimer[token]
-        form = divmod(diff.days * 86400 + diff.seconds, 60)
-        return form[0] * 60 + form[1] > 60 * 60 * 12
-
-    @staticmethod
-    def refreshToken(token):
-        BicycleManager.__tokenTimer[token] = datetime.datetime.now()
-
-    @staticmethod
-    def createBikeRoom(roomid):
-        url = 'https://versuch.ess-project.ovgu.de:4443/api/sessions'
-        data = {'session': roomid}
-        header = {
-            'Authorization': "Basic " + base64.b64encode(b"OPENVIDUAPP:Jochen").decode("utf-8", "ignore"),
-            'Content-Type': 'application/json'
-        }
-        r = requests.post(url=url, data=json.dumps(data), headers=header, verify=False)
-
-        data = r.json()
-        if('id' in data):
-            return data['id']
-
-        return 'create session unsuccessful'
-
-    @staticmethod
-    def createJoinRequest(roomid):
-        url = 'https://versuch.ess-project.ovgu.de:4443/api/tokens'
-        data = {'session': roomid}
-        header = {
-            'Authorization': "Basic " + base64.b64encode(b"OPENVIDUAPP:Jochen").decode("utf-8", "ignore"),
-            'Content-Type': 'application/json'
-        }
-        r = requests.post(url=url, data=json.dumps(data), headers=header, verify=False)
-
-        data = r.json()
-        print(data)
-        if('error' in data):
-            return "session can not be join"
-        print(data)
-        return data['token']
 
     '''
     @staticmethod

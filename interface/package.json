@@ -11,7 +11,6 @@
     "lottie-web": "^5.1.18",
     "mediasoup-client": "^2.1.1",
     "nodemon": "^1.17.5",
-    "openvidu-browser": "^2.2.0",
     "react": "^16.4.1",
     "react-block-ui": "^1.1.1",
     "react-dom": "^16.4.1",

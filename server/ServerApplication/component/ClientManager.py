@@ -19,6 +19,10 @@ class ClientManager(WebSocket):
     status = False
     clientport = 7001
 
+    MeansManagerReference = None
+
+    clientroom = SpecialDict()
+
     clients = []
 
     @staticmethod
@@ -191,14 +195,7 @@ class ClientManager(WebSocket):
     def askforvideo(request):
         data = json.loads(request)
 
-        sessionid = BicycleManager.bicycleroom[data['bikeid']]
-        print("Session id is", sessionid)
-
-        token = BicycleManager.createJoinRequest(sessionid)
-        if (token == 'session can not be join'):
-            print('Session :', sessionid, 'can not be join :')
-
-        data['token'] = token
+        data['token'] = ClientManager.clientroom[data['bikeid']]
         return ClientComment.generateAskForVideo(data)
 
 

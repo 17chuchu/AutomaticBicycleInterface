@@ -4,8 +4,8 @@ class SocketManager
 {
     static client = undefined
 
-    static url = 'undefined'
-    static handlenewurl = undefined
+    static appref = undefined
+    static roomid = 'undefined'
 
     static initialize(ip,port)
     {
@@ -15,17 +15,18 @@ class SocketManager
         });
 
         SocketManager.client.addEventListener('message', (res) => {
-            console.log(res.data)
             if(res.data == 'undefined')
             {
                 return
             }
-            else if(!(SocketManager.handlenewurl === undefined))
+            else
             {
-                if(!(SocketManager.url == res.data))
+                if(!(SocketManager.roomid === res.data))
                 {
-                    SocketManager.handlenewurl(res.data)
-                    SocketManager.url = res.data
+                    SocketManager.roomid = res.data
+                    console.log(res.data)
+                    console.log("Attempt calling to room:",SocketManager.roomid)
+                    while(!this.appref.callToRoom(SocketManager.roomid)){}
                 }
             }
 
