@@ -70,8 +70,9 @@ class MeansManager(WebSocket):
                     data['clientroomid'] = ClientManager.clientroom[key]
                     info = json.dumps(MeansComment.generateComment('registerNewRoom', data))
                     MeansManager.currentmeans.sendMessage(info)
-
+            
             print('-- Means Connection Successful --')
+
 
         except Exception as e:
             print("Message error is : " + e)

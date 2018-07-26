@@ -12,9 +12,13 @@ import uuidv1 from 'uuid/v1'
 
 
 import {
-     TabPane, Fade
+    TabPane,
+    Fade,
+    Container, Row, Col,
+    Alert
 } from 'reactstrap';
 import SocketManager from "../non-component/SocketManager";
+import WifiAnimation from "./lottie/WifiAnimation";
 
 
 
@@ -23,21 +27,26 @@ class CameraTab extends React.Component
 {
 
     webrtc = undefined
+    switch = React.createRef();
     isReady = false
 
     state = {
-        switchlock: false
+        switchlock: false,
+        visible: false,
+        waitsecond: 10
     }
 
     constructor(props)
     {
         super(props)
         SocketManager.handleaskforvideo = this.handleReceiveRoomId
+        SocketManager.handleaskforcontrol = this.handleAskForControl
     }
 
     componentDidMount() {
+        //'http://versuch.ess-project.ovgu.de:8080'
         this.webrtc = new SimpleWebRTC({
-            url: 'http://localhost:8888'
+            url: 'http://141.44.17.141:8080'
         });
         this.webrtc.on('videoAdded', this.addVideo);
         this.webrtc.on('videoRemoved', this.removeVideo);
@@ -87,20 +96,100 @@ class CameraTab extends React.Component
         return this.webrtc.leaveRoom();
     }
 
+    forceswitchOff = async () => {
+        if(this.switch.current.state.isOnOff)
+        {
+            this.switch.current.toggleswitch()
+        }
+    }
+
     beginToCall = async () => {
         SocketManager.askforvideo(SocketManager.selectedBike)
     }
 
     handleReceiveRoomId = async (info) => {
-        console.log(info)
-        return this.webrtc.joinRoom(info.pack.bikeid);
+        console.log(info.pack.token)
+        this.webrtc.joinRoom(info.pack.token);
+    }
+
+    updown = [];
+    leftright = [];
+
+    handleKeyUp = async (event) => {
+        if(event.key == 's'){
+            this.updown.pop("down")
+        }
+        if(event.key == 'w'){
+            this.updown.pop("up")
+        }
+        if(event.key == 'd'){
+            this.leftright.pop("right")
+        }
+        if(event.key == 'a'){
+            this.leftright.pop("left")
+        }
+        SocketManager.giveBikeDirection(this.updown,this.leftright)
+        console.log(this.updown,this.leftright)
+    }
+
+    handleKeyDown = async (event) => {
+        if(event.key == 's') {
+            if (!this.updown.includes("down")) {
+                this.updown.push("down")
+                SocketManager.giveBikeDirection(this.updown,this.leftright)
+            }
+        }
+        if(event.key == 'w'){
+            if (!this.updown.includes("up")) {
+                this.updown.push("up")
+                SocketManager.giveBikeDirection(this.updown,this.leftright)
+            }
+        }
+        if(event.key == 'd'){
+            if (!this.leftright.includes("right")) {
+                this.leftright.push("right")
+                SocketManager.giveBikeDirection(this.updown,this.leftright)
+            }
+        }
+        if(event.key == 'a'){
+            if (!this.leftright.includes("left")) {
+                this.leftright.push("left")
+                SocketManager.giveBikeDirection(this.updown,this.leftright)
+            }
+        }
+        console.log(this.updown,this.leftright)
+    }
+
+    handleFocus = async () => {
+        SocketManager.askForToggleControl("true")
+    }
+
+    handleBlur = async () => {
+        SocketManager.askForToggleControl("false")
+    }
+
+    onDismiss = async () => {
+        this.setState({ visible: false });
+    }
+
+    handleAskForControl = async (info) => {
+        console.log("waittime is",info.pack)
+        this.setState({visible: true,waitsecond: info.pack})
     }
 
     render()
     {
         return(
             <TabPane tabId="CameraTab">
-                <SwitchAnimation readyToCall={this.beginToCall} disconnectCall={this.disconnectCall} isLock={this.state.switchlock}/>
+                <Alert color="warning" isOpen={this.state.visible} toggle={this.onDismiss} style = {{ marginRight: "10px",marginLeft: "10px"}}>
+                    There is someone else controlling this bike. Please wait {this.state.waitsecond} seconds and try again.
+                </Alert>
+                <Container>
+                    <Row>
+                        <Col><SwitchAnimation ref={this.switch} readyToCall={this.beginToCall} disconnectCall={this.disconnectCall} isLock={this.state.switchlock}/></Col>
+                        <Col><WifiAnimation onKeyUp={this.handleKeyUp} onKeyDown={this.handleKeyDown} onFocus={this.handleFocus} onBlur={this.handleBlur}/></Col>
+                    </Row>
+                </Container>
                 <Fade className="CameraTabContainer" in={this.props.active == "CameraTab"} ref = "remotes">
                     <div
                         className="videoContainer"

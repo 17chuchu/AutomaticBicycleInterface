@@ -32,8 +32,6 @@ class LoginCard extends React.Component
     {
         super(props)
         SocketManager.handlelogin = this.handlelogin
-
-
     }
 
     setmargin = async (margin) =>
@@ -57,14 +55,19 @@ class LoginCard extends React.Component
 
     handlelogin = async (data) =>
     {
-        if(data.pack == "Login Unsuccessful.")
+        if(data === "Login Unsuccessful.")
         {
             this.setState({usernameInvalid : true, passwordValid : true})
+        }
+        else if(data === "Visitor Login Successful.")
+        {
+            this.props.visitorMode()
         }
         else
         {
             this.props.loadUserInfo(JSON.parse(data.info))
             this.props.userMode()
+            this.setState({usernameInvalid : false, passwordValid : false})
         }
         this.setState({loginpresent : false})
     }
@@ -74,7 +77,7 @@ class LoginCard extends React.Component
     render() {
         return (
             <Fade in={this.state.fadein} >
-                    <Card body className="text-center" style={{width: "500px", float: "right", marginRight: this.state.logincardmargin, marginTop: "10px",zIndex: "100", backgroundColor: "#fcf6e5"}}>
+                    <Card body className="text-center" style={{width: "500px", float: "right", marginRight: "10px", marginTop: this.state.logincardmargin,zIndex: "100", backgroundColor: "#fcf6e5"}}>
                         <CardTitle style = {{color : "#c34580"}}>Welcome</CardTitle>
                         {this.state.loginpresent && <LoginAnimation/>}
                         <Form style={{marginTop: "20px"}} onSubmit = {this.performLogin}>

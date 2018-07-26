@@ -10,7 +10,6 @@ class SearchBike extends React.Component
     state = {
         isBikeOnline: "Offline"
     }
-    //(this.props.bikeonline) ? "Online" : "Offline"
 
     constructor()
     {
@@ -33,6 +32,7 @@ class SearchBike extends React.Component
 
     handleCheckBike = async (info) => {
         this.setState({isBikeOnline : info.pack.isBikeOnline})
+        this.props.toggleOnline(info.pack.isBikeOnline === "Online")
     }
 
     render()

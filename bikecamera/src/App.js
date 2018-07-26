@@ -22,7 +22,7 @@ class App extends React.Component {
             localVideoEl: ReactDOM.findDOMNode(this.refs.localref),
             autoRequestMedia: true,
             url: 'http://localhost:8888',
-            autoplay: true
+            autoplay: true,
         });
         this.webrtc.on('readyToCall',this.readyToCall)
         this.webrtc.on('createdPeer', this.createdPeer);

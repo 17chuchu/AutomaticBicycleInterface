@@ -116,7 +116,22 @@
   float: none;
   margin: auto;
   margin-bottom: 5px;
-  margin-top: -5px;
+  margin-top: -2px;
+
+
+  width: 150px;
+}
+
+.mountainanimation
+{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  float: none;
+  margin: auto;
+  margin-bottom: 5px;
+  margin-top: -12px;
 
 
   width: 150px;

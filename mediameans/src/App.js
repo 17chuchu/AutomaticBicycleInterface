@@ -4,7 +4,10 @@ import './App.css';
 
 import uuidv1 from 'uuid/v1'
 import SimpleWebRTC from 'simplewebrtc'
+import attachMediaStream from 'attachmediastream';
 import ReactDOM from 'react-dom'
+import {Button
+} from 'reactstrap';
 import SocketManager from "./NonComponent/SocketManager";
 
 class App extends Component {
@@ -57,22 +60,31 @@ class Capsule extends Component
     initializeRTC = async (subid, pubid) => {
         this.pubid = pubid
         this.pubrtc = new SimpleWebRTC({
-            url: 'http://localhost:8888'
+            url: 'http://141.44.17.141:8888'
         });
         this.pubrtc.on('videoAdded', this.addPublisher);
         this.pubrtc.on('videoRemoved', this.removePublisher);
-        this.pubrtc.joinRoom(this.pubid);
         console.log("Publisher Launch on room:",pubid);
+        this.pubrtc.joinRoom(this.pubid);
 
         this.subid = subid
+        this.subrtc = new SimpleWebRTC({
+            localVideoEl: ReactDOM.findDOMNode(this.refs.localVideo),
+            url: 'http://141.44.17.141:8080',
+        });
+        this.subrtc.on('readyToCall',this.readyToCall)
+        console.log("Subscriber Launch on room:",this.subid)
         this.setState({})
+    }
+
+    readyToCall = async () => {
+        console.log('This is ready')
     }
 
     addPublisher = async (video, peer) => {
         console.log("Publisher found")
         //  console.log(this.refs.remotes);
         var remotes = ReactDOM.findDOMNode(this.refs.remotes);
-        console.log(video);
         if (remotes) {
             var container = document.createElement('div');
             container.style.transform = 'rotateY(-180deg)'
@@ -87,16 +99,11 @@ class Capsule extends Component
             video.muted = true
             console.log(container);
             remotes.appendChild(container);
-            this.pubelement = video;
+            this.pubelement = attachMediaStream(peer.stream);
 
-
-            this.subrtc = new SimpleWebRTC({
-                url: 'http://localhost:8888',
-            });
-            this.subrtc.localVideoEl = this.pubelement
-            this.subrtc.joinRoom(this.subid);
-            console.log(this.pubelement)
-            console.log("Subscriber Launch on room:",this.subid)
+            this.subrtc.webrtc.localStreams.push(this.pubelement.srcObject)
+            this.subrtc.joinRoom(this.subid)
+            this.subrtc.mute()
         }
         this.pubrtc.mute()
     }
@@ -115,7 +122,7 @@ class Capsule extends Component
         return (
             <div>
                 <div ref="remotes" className="VideoBox"> <p1 className="TextBox">{this.pubid}</p1> </div>
-                <video id="localVideo"></video>
+                <video ref="localVideo"></video>
             </div>
         )
     }

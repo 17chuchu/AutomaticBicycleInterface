@@ -36,6 +36,7 @@ class App extends React.Component
     port = 7001
 
     searchbike = React.createRef();
+    cameratab = React.createRef();
     authenticationset = React.createRef();
 
     static = {
@@ -55,7 +56,8 @@ class App extends React.Component
         loginTog: false,
         loginButtonDisable: false,
 
-        collapsesearch: false
+        collapsesearch: false,
+        isOnline: false
     }
 
     constructor(props)
@@ -74,7 +76,6 @@ class App extends React.Component
         })
 
         SocketManager.initialize(this.myip,this.port)
-
     }
 
     toggleNavItem = async (num) =>
@@ -89,6 +90,13 @@ class App extends React.Component
     }
 
     donothingfunction = async () => {}
+
+    toggleOnline = async (status) => {
+        if(!status) {
+            this.cameratab.current.forceswitchOff()
+        }
+        this.setState({isOnline: status})
+    }
 
     toggleLogin = async () => {
         this.setState({loginTog: !this.state.loginTog})
@@ -135,38 +143,6 @@ class App extends React.Component
         this.setState(this.state.allBikeId)
     }
 
-    updown = [];
-    leftright = [];
-
-    handleKeyUp = async (event) => {
-        if(event.key == 's'){
-            console.log('enter press here! ')
-        }
-        if(event.key == 'w'){
-            console.log('enter press here! ')
-        }
-        if(event.key == 'd'){
-            console.log('enter press here! ')
-        }
-        if(event.key == 'a'){
-            console.log('enter press here! ')
-        }
-    }
-
-    handleKeyDown = async (event) => {
-        if(event.key == 's'){
-            this.updown.append("down")
-        }
-        if(event.key == 'w'){
-            this.updown.append("up")
-        }
-        if(event.key == 'd'){
-            this.leftright.append("right")
-        }
-        if(event.key == 'a'){
-            this.leftright.append("left")
-        }
-    }
 
 
     render()
@@ -174,35 +150,37 @@ class App extends React.Component
         let status = this.state.navitemstatus
         return (
             <div className="Theme-color">
-                <Button onKeyUp={this.handleKeyUp} onKeyDown={this.handleKeyDown}>Button</Button>
                 <div className="loginTheme">
                     <Button color="secondary"  onClick={!this.state.loginButtonDisable ? this.toggleLogin : this.donothingfunction} style = {{ height : "45px", width : "200px",color: "#509f98",backgroundColor: "#fcf6e5" ,fontWeight: "500", fontSize : "20px",marginTop: "10px", marginRight: "10px",float : "right",  textDecoration: 'none'}} >visitor</Button>
                     <AuthenticationSet loginTog = {this.state.loginTog} toggleLogin = {this.toggleLogin} setBikeId = {this.setBikeId} setLoginButton = {this.setLoginButton} forceCollapse={this.forceCollapse}/>
                 </div>
                 <p className="App-intro">App-Name</p>
-                <SearchBike ref={this.searchbike} bikeid = {this.state.selectedbike} setBikeId={this.setBikeId} addBikeId={this.addBikeId} removeBikeId={this.removeBikeId} allBike={this.state.allBikeId} toggleCollapse={this.toggleCollapse} collapsesearch={this.state.collapsesearch}/>
-                <Nav pills className = "App-nev-custom">
-                    <NavItem className="App-nevButton-custom">
-                        <NavLink href="#" className= {status[0]} onClick={() => { this.toggleNavItem(0); }} >information</NavLink>
-                    </NavItem>
-                    <NavItem className="App-nevButton-custom">
-                        <NavLink href="#" className= {status[1]} onClick={() => { this.toggleNavItem(1); }} >camera</NavLink>
-                    </NavItem>
-                    <NavItem className="App-nevButton-custom">
-                        <NavLink href="#" className= {status[2]} onClick={() => { this.toggleNavItem(2); }} >others</NavLink>
+                <SearchBike ref={this.searchbike} bikeid = {this.state.selectedbike} setBikeId={this.setBikeId} addBikeId={this.addBikeId} removeBikeId={this.removeBikeId} allBike={this.state.allBikeId} toggleCollapse={this.toggleCollapse} collapsesearch={this.state.collapsesearch} toggleOnline={this.toggleOnline}/>
+                <Collapse isOpen={this.state.isOnline}>
+                    <Nav pills className = "App-nev-custom">
+                        <NavItem className="App-nevButton-custom">
+                            <NavLink href="#" className= {status[0]} onClick={() => { this.toggleNavItem(0); }} >information</NavLink>
+                        </NavItem>
+                        <NavItem className="App-nevButton-custom">
+                            <NavLink href="#" className= {status[1]} onClick={() => { this.toggleNavItem(1); }} >camera</NavLink>
+                        </NavItem>
+                        <NavItem className="App-nevButton-custom">
+                            <NavLink href="#" className= {status[2]} onClick={() => { this.toggleNavItem(2); }} >others</NavLink>
 
-                    </NavItem>
-                </Nav>
-                <BlockUi tag="div" blocking={false}>
-                    <TabContent activeTab={this.state.activeTab}>
-                        <RealtimeTab
-                            active = {this.state.activeTab}
-                        />
-                        <CameraTab
-                            active = {this.state.activeTab}
-                        />
-                    </TabContent>
-                </BlockUi>
+                        </NavItem>
+                    </Nav>
+                    <BlockUi tag="div" blocking={false}>
+                        <TabContent activeTab={this.state.activeTab}>
+                            <RealtimeTab
+                                active = {this.state.activeTab}
+                            />
+                            <CameraTab
+                                ref={this.cameratab}
+                                active = {this.state.activeTab}
+                            />
+                        </TabContent>
+                    </BlockUi>
+                </Collapse>
             </div>
         );
     }

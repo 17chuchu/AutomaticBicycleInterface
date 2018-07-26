@@ -1,16 +1,15 @@
 
 import React from 'react'
 import Lottie from 'react-lottie';
-import * as animationData from './jsonfile/toggle_switch.json'
+import * as animationData from './jsonfile/location.json'
 
-export default class SwitchAnimation extends React.Component {
+export default class MountainAnimation extends React.Component {
 
     animation = React.createRef()
 
     constructor(props) {
         super(props);
-        this.state = {isPause: false,isStopped: false, isPaused: false, segment: [50, 100], isOnOff: false,shouldrender: true,speed: 200};
-
+        this.state = {isPause: false,isStopped: false, isPaused: false, segment: [30, 0], isOnOff: false,shouldrender: true,speed: 200};
     }
 
     componentDidMount() {
@@ -21,19 +20,21 @@ export default class SwitchAnimation extends React.Component {
         return this.state.shouldrender
     }
 
-    toggleswitch = async () => {
+    focus = async () =>
+    {
         if(!this.props.isLock) {
             this.state.shouldrender = true
             if (this.state.isOnOff) {
-                this.setState({isOnOff: false, segment: [50, 100], speed: 3, isPaused: false, isStopped: false})
-                this.props.disconnectCall()
+                this.setState({isOnOff: false, segment: [45, 90], speed: 2, isPaused: false, isStopped: false})
+                this.props.onBlur()
             }
             else {
-                this.setState({isOnOff: true, segment: [0, 50], speed: 3, isPaused: false, isStopped: false})
-                this.props.readyToCall()
+                this.setState({isOnOff: true, segment: [0, 45], speed: 2, isPaused: false, isStopped: false})
+                this.props.onFocus()
             }
         }
     }
+
 
     complete = async () =>
     {
@@ -44,11 +45,6 @@ export default class SwitchAnimation extends React.Component {
 
 
     render() {
-        const buttonStyle = {
-            display: 'block',
-            margin: '10px auto'
-        };
-
         const defaultOptions = {
             loop: false,
             autoplay: false,
@@ -62,7 +58,7 @@ export default class SwitchAnimation extends React.Component {
             }
         };
 
-        return <div className="switchanimation" onClick={this.toggleswitch}>
+        return <div className="mountainanimation" onFocus={this.focus} onBlur={this.focus} onKeyUp={this.props.onKeyUp} onKeyDown={this.props.onKeyDown}>
             <Lottie ref={this.animation}
                     options={defaultOptions}
                     eventListeners={[
@@ -71,8 +67,9 @@ export default class SwitchAnimation extends React.Component {
                             callback: () => this.complete(),
                         },
                     ]}
-                    height={38}
-                    width={400}
+                    height={65}
+                    width={65}
+                    progress={this.state.progress}
                     isStopped={this.state.isStopped}
                     isPaused={this.state.isPaused}
                     segments={this.state.segment}

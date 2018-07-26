@@ -32,6 +32,7 @@ class SocketManager
 
         SocketManager.client.addEventListener('close', (res) => {
             console.log("Disconnect from server.")
+            window.location.reload();
         })
 
     }
