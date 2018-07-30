@@ -9,4 +9,4 @@ class MeansComment:
         data = dict()
         data['topic'] = topic
         data['comment'] = comment
-        return data
+        return  data

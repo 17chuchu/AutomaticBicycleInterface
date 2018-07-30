@@ -16,7 +16,6 @@ urlpatterns = [
 ]
 
 ClientManager.initManager()
-#time.sleep(1)
 BicycleManager.initManager()
 MeansManager.initManager()
 

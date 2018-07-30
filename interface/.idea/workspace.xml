@@ -71,7 +71,7 @@
       <file leaf-file-name="SocketManager.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/non-component/SocketManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="818">
+            <state relative-caret-position="1020">
               <caret line="51" column="81" lean-forward="false" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="81" />
               <folding />
             </state>
@@ -327,12 +327,12 @@
       <workItem from="1531904819035" duration="10431000" />
       <workItem from="1532031221899" duration="296000" />
       <workItem from="1532077706173" duration="3566000" />
-      <workItem from="1532089706388" duration="46626000" />
+      <workItem from="1532089706388" duration="46872000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="307424000" />
+    <option name="totallyTimeSpent" value="307670000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -750,7 +750,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/non-component/SocketManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="818">
+        <state relative-caret-position="1020">
           <caret line="51" column="81" lean-forward="false" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="81" />
           <folding />
         </state>
