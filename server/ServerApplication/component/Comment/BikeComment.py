@@ -2,8 +2,6 @@ import json
 
 class BikeComment:
 
-    Login = 1
-
     @staticmethod
     def generateComment(command, topic, comment):
         data = dict()

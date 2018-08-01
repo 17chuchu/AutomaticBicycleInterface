@@ -25,8 +25,6 @@ class App extends Component {
             document.getElementById('contain')
         );
         capsule.current.initializeRTC(SocketManager.subscriber[bikeid],SocketManager.publisher[bikeid])
-
-        //const capsule = new Capsule()
     }
 
     render()
@@ -91,7 +89,6 @@ class Capsule extends Component
             container.className = 'videoContainer';
             container.id = 'container_' + this.pubrtc.getDomId(peer);
             container.appendChild(video);
-            // suppress contextmenu
             video.oncontextmenu = function() {
                 return false;
             };

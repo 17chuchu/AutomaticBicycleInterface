@@ -65,7 +65,6 @@ class ClientManager(WebSocket):
                 self.sendMessage(json.dumps(ClientManager.askforvideo(obj['pack'])))
             elif(obj['code'] == ClientComment.GiveDirection):
                 ClientManager.givedirection(obj['pack'],obj['token'])
-                #self.sendMessage(json.dumps(ClientManager.givedirection(obj['pack'])))
             elif(obj['code'] == ClientComment.AskForControl):
                 result = ClientManager.bindtobike(obj['pack'],obj['token'])
                 if(result != None):
@@ -103,8 +102,8 @@ class ClientManager(WebSocket):
     @staticmethod
     def validateToken(token):
         diff = datetime.datetime.now() - ClientManager.__tokenTimer[token]
-        form = divmod(diff.days * 86400 + diff.seconds, 60)
-        return form[0] * 60 + form[1] > 60 * 60 * 12
+        form = diff.total_seconds()
+        return diff >= 300
 
     @staticmethod
     def refreshToken(token):

@@ -182,7 +182,7 @@ class CameraTab extends React.Component
         return(
             <TabPane tabId="CameraTab">
                 <Alert color="warning" isOpen={this.state.visible} toggle={this.onDismiss} style = {{ marginRight: "10px",marginLeft: "10px"}}>
-                    There is someone else controlling this bike. Please wait {this.state.waitsecond} seconds and try again.
+                    There is someone else controlling this bike. Please wait {60 - this.state.waitsecond} seconds and try again.
                 </Alert>
                 <Container>
                     <Row>

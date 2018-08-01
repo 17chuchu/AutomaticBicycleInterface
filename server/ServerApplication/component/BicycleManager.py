@@ -95,35 +95,6 @@ class BicycleManager(WebSocket):
         except Exception as e:
             print("Message error is : " + e)
 
-    @staticmethod
-    def login(request):
-        data = json.loads(request)
-
-        if ("username" in data):
-            userlist = Client.objects.filter(username=data["username"], password=data["password"])
-        elif ("email" in data):
-            userlist = Client.objects.filter(email=data["email"], password=data["password"])
-        else:
-            return ClientComment.generateLoginComment("Login Unsuccessful.")
-
-        if (len(userlist) != 0):
-            loginUser = userlist[0]
-        else:
-            return ClientComment.generateLoginComment("Login Unsuccessful.")
-
-        if (loginUser.id in BicycleManager.__loginUser):
-
-            authToken = BicycleManager.__loginUser[loginUser.id]
-        else:
-            authToken = str(uuid.uuid4()).replace("-", "")
-            BicycleManager.__loginUser[authToken] = loginUser.id
-
-        token = ClientComment.generateLoginComment(authToken)
-        BicycleManager.refreshToken(authToken)
-        userlist[0].password = ""
-        token['info'] = BicycleManager.clienttoString(userlist[0])
-
-        return token
 
     @staticmethod
     def bindToBike(status,bikeid,userid):
