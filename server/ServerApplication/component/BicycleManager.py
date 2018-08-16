@@ -54,15 +54,17 @@ class BicycleManager(WebSocket):
             data = json.loads(self.data)
             if(data['topic'] == 'id'):
                 print("Register Bike :", data['comment'])
-                BicycleManager.bicycleid[str(self.address)] = data['comment']
-                BicycleManager.bicyclesocketref[data['comment']] = self
+                if("BK" in data['comment']):
+                    BicycleManager.bicycleid[str(self.address)] = data['comment']
+                    BicycleManager.bicyclesocketref[data['comment']] = self
 
             if(data['topic'] == 'requestopenroom'):
                 print("Bike :",data['comment'],"want to publish to a room.")
-                bikeid = data['comment']
-                BicycleManager.MeansManagerReference.registerNewRoom(bikeid)
-                comment = BikeComment.generateComment('','openroomtoken',BicycleManager.bicycleroom[bikeid])
-                self.sendMessage(json.dumps(comment))
+                if(data['comment'] in BicycleManager.bicycleid):
+                    bikeid = data['comment']
+                    BicycleManager.MeansManagerReference.registerNewRoom(bikeid)
+                    comment = BikeComment.generateComment('','openroomtoken',BicycleManager.bicycleroom[bikeid])
+                    self.sendMessage(json.dumps(comment))
         except Exception as e:
             print("Message error is : " + e)
 
